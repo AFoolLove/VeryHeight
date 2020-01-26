@@ -1,0 +1,22 @@
+# version 0
+
+world:
+  # world 为主世界名称，根据世界名称填写
+  world:
+    # 根据高度不同，给予不同的BUFF
+    height:
+      # 处于0到4格时（包含0和4格）触发
+      0-4:
+        # 效果 凋零每过6秒追加6级持续6秒 霉运每过6秒追加6级持续6秒 失明每过6秒追加6级持续6秒
+        # <effect_name>:<amplifier>:<duration>
+        #     string   :   level   :   tick
+        effects: ['wither:+6:120','unluck:+6:120','blindness:+6:120']
+        # 每过 100 tick 执行一次
+        tick: 100
+      5-12:
+        # 效果 急迫每过1秒等级设置为1级持续1秒
+        effects: ['fast_digging:1:20']
+        tick: 20
+      127-255:
+        effects: ['confusion:1:600']
+        tick: 600
