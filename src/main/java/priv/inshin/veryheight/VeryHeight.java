@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. InShin. All rights reserved.
+ */
+
 package priv.inshin.veryheight;
 
 import org.bukkit.Bukkit;
@@ -10,7 +14,10 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public final class VeryHeight extends JavaPlugin {
     private ConfigManager mConfigManager;
@@ -29,7 +36,9 @@ public final class VeryHeight extends JavaPlugin {
                             // 给予相应 BUFF
                             for (PotionEffect effect : heightRangeEffect.effects(player)) {
                                 player.removePotionEffect(effect.getType());
-                                player.addPotionEffect(effect, false);
+                                if (effect.getDuration() != 0) {
+                                    player.addPotionEffect(effect, false);
+                                }
                             }
                         }
                     }
@@ -60,9 +69,11 @@ public final class VeryHeight extends JavaPlugin {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (sender.isOp() && args.length > 0 && args[0].equals("reconfig")) {
+        if (args.length > 0 && args[0].equals("reconfig") && sender.hasPermission("inshin.veryheight.reconfig")) {
+            reloadConfig();
             this.mConfigManager.heightRangeEffects.clear();
-            mConfigManager = new ConfigManager(this);
+            this.mConfigManager = new ConfigManager(this);
+            sender.sendMessage("[VeryHeight] §2Reload config.");
             return true;
         }
         return super.onCommand(sender, command, label, args);

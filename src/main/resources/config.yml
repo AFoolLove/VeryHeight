@@ -11,12 +11,16 @@ world:
         # <effect_name>:<amplifier>:<duration>
         #     string   :   level   :   tick
         effects: ['wither:+6:120','unluck:+6:120','blindness:+6:120']
+        # 离开范围后 效果 设置凋零、霉运、失明为0秒，增加 霉运1级持续10秒
+        leave: ['wither:0:0','unluck:0:0','blindness:0:0','weakness:0:200']
         # 每过 100 tick 执行一次
+        # -1 进入范围内只执行一次
         tick: 100
       5-12:
-        # 效果 急迫每过1秒等级设置为1级持续1秒
+        # 效果 急迫每过1秒等级设置为2级持续1秒
         effects: ['fast_digging:1:20']
         tick: 20
       127-255:
+        # 效果 反胃每过30秒等级设置为2级持续30秒
         effects: ['confusion:1:600']
         tick: 600

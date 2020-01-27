@@ -1,7 +1,6 @@
 name: VeryHeight
 version: ${project.version}
 main: priv.inshin.veryheight.VeryHeight
-api-version: '1.13'
 authors: [InShin]
 description: very height
 commands:
