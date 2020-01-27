@@ -6,15 +6,13 @@ package priv.inshin.veryheight;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 配置管理器，文件采用YMAL格式
@@ -35,7 +33,12 @@ public class ConfigManager {
                         int minHeight = Integer.parseInt(range[0]);
                         int maxHeight = Integer.parseInt(range[1]);
                         List<HeightRangeEffects> heightRangeEffects = this.heightRangeEffects.computeIfAbsent(world, k -> new ArrayList<>());
-                        heightRangeEffects.add(new HeightRangeEffects(minHeight, maxHeight, height.getStringList(key + ".effects"), height.getInt(key + ".tick", 0)));
+                        heightRangeEffects.add(new HeightRangeEffects(
+                                minHeight,
+                                maxHeight,
+                                height.getStringList(key + ".effects"),
+                                height.getStringList(key + ".leave"),
+                                height.getInt(key + ".tick", 0)));
                     }
                 }
             }
